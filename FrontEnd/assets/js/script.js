@@ -74,17 +74,23 @@ function filtrerElements(categorie) {
 }
 
 /* Farouk */
-const buttonFiltre = document.querySelectorAll('.filter-button');
-buttonFiltre.forEach(function(button) {
-  button.addEventListener('click', function(e) {
-    categories.forEach(function(category) {
-      if (category === e.target.textContent) {
+// Sélectionne tous les boutons de filtre
+const boutonsFiltre = document.querySelectorAll('.filtre');
+
+// Parcours chaque bouton de filtre
+boutonsFiltre.forEach(function(bouton) {
+  // Ajoute un écouteur d'événement au clic sur chaque bouton
+  bouton.addEventListener('click', function(e) {
+    // Parcourt chaque catégorie
+    categories.forEach(function(categorie) {
+      // Vérifie si la catégorie correspond au texte du bouton cliqué
+      if (categorie === e.target.textContent) {
+        // Filtre les éléments en fonction de la catégorie sélectionnée
         filtrerElements(e.target.textContent);
       }
     })
   });
 });
-
 
 
 
