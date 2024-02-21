@@ -51,7 +51,7 @@ categories.forEach(category => {
     const button = document.createElement('button'); // Crée un bouton
     button.textContent = category; // Définit le texte du bouton
     button.classList.add('filter-button'); // Ajoute une classe pour personnaliser les styles CSS
-    button.addEventListener('click', () => filtrerElements(category)); // Ajoute un écouteur d'événements pour filtrer les éléments lors du clic sur le bouton
+    button.addEventListener('click', (e) => filtrerElements(category, e));// Ajoute un écouteur d'événements pour filtrer les éléments lors du clic sur le bouton
     buttonsContainer.appendChild(button); // Ajoute le bouton au conteneur
 });
 
@@ -62,8 +62,17 @@ portfolioSection.appendChild(buttonsContainer);
 const gallery = document.querySelector('.gallery');
 
 // Fonction pour filtrer les éléments en fonction de la catégorie sélectionnée
-function filtrerElements(categorie) {
+function filtrerElements(categorie, e) {
     const elements = gallery.querySelectorAll('figure'); // Sélectionne tous les éléments <figure> dans la galerie
+    const filters = document.querySelectorAll('.filter-button'); 
+    filters.forEach((button) => {
+          button.style.backgroundColor = "white";
+          button.style.color = "#1D6154";
+        if (e.target.textContent === categorie) {
+          e.target.style.backgroundColor = "#1D6154";
+          e.target.style.color = "white";
+        }  
+    });
     elements.forEach(element => {
         if (categorie === 'tous' || element.dataset.category === categorie) {
             element.style.display = 'block'; // Affiche l'élément s'il correspond à la catégorie sélectionnée ou si la catégorie est 'Tous'
@@ -92,7 +101,10 @@ boutonsFiltre.forEach(function(bouton) {
   });
 });
 
-
+const tous = document.querySelector('.filter-button'); 
+tous.style.color = "white";
+tous.style.backgroundColor = "#1D6154";
+console.log(tous)
 
 
 

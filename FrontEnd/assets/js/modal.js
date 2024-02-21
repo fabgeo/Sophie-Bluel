@@ -22,4 +22,6 @@ closeBtn.addEventListener("click", function() {
 
 async function generateModalPhoto() {
     const response = await fetch('http://localhost:5678/api/works/');
+
+    
 }

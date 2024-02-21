@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector('header'); // L'en-tête de la page
   const modeEdition = document.querySelector('.mode-edition'); // Élément de mode d'édition
   const buttonModifer = document.querySelector('#button-modifer'); // Bouton de modification
-  const buttonFilters = document.querySelector('.filters'); // Bouton de filtrage
+  const buttonFilters = document.getElementById('buttons'); // Bouton de filtrage
+  console.log(buttonFilters)
 
   // Met à jour l'interface utilisateur une fois que le DOM est chargé
   updateUI();
@@ -94,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
      
       // Affiche ou masque le bouton de modification en fonction de l'état de connexion
       buttonModifer.style.display = isLoggedIn ? 'inline-flex' : 'none';
+
       // Affiche ou masque le bouton de filtrage en fonction de l'état de connexion
       buttonFilters.style.display = isLoggedIn ? 'none' : 'inline-flex';
       
@@ -102,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
      
       // Affiche ou masque l'élément de mode d'édition en fonction de l'état de connexion
       modeEdition.style.display = isLoggedIn ? 'flex' : 'none';
+      console.log(buttonFilters)
   }
 
   // Fonction pour gérer la connexion/déconnexion de l'utilisateur
