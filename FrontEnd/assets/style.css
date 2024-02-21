@@ -272,3 +272,139 @@ footer nav ul {
 	justify-content: center;
 	gap: 15px;
 }
+/* fin des boutons */
+
+/* mode édition */
+
+.mode-edition{
+	height: 60px;
+	width: 100%;
+	background-color: #000000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	color: white;
+	z-index: 1;
+}
+
+.mode-edition p {
+	font-weight: 400;
+	font-size: 16px;
+}
+
+/* Fin mode édition */
+
+/***** code button modified *****/
+#button-modifer{
+	display: inline-flex; 
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	cursor: pointer;
+	margin: 0 10px;
+	padding: 5px 10px;
+	}
+	#button-modifer{
+		color: black;
+	}
+	
+	.text-button-modifer{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	color: #000000;
+	}
+/*****fin code button modified  *****/
+
+/***** Ma modal *****/
+
+#myModal{
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+  }
+	.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 33%;
+  	height: 66%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+  	left: 629px;
+  	top: -99px;
+	border-radius: 25px;
+	box-shadow: none;
+  }
+  
+  .close{
+	color: black;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	position: fixed;
+  	top: 227px;
+  	left: 1207px;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+
+  .modal-content .titre-h2{
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  color: #000000;
+  top: 263px;
+  position: fixed;
+  left: 860px;
+}
+
+.ligne {
+	width: 25%;
+	height: 1px;
+	background-color: #B3B3B3;
+	position: absolute;
+	top: 706px;
+  	left: 739px;
+  	position: fixed;
+}
+
+.modal button {
+	border: none;
+	font-family: 'Work Sans';
+	background-color: #1D6154;
+	color: white;
+	font-weight: 400;
+	width: 327px;
+	height: 36px;
+	padding: 24px 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    border-radius: 60px;
+	position: absolute;
+	bottom: 60px;
+}
+

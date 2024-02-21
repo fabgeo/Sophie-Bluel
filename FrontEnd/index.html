@@ -10,8 +10,36 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="assets/js/script.js" defer></script>
+	<script src="assets/js/login.js" defer></script>
+	<script src="assets/js/modal.js" defer></script>
+	<script src="https://kit.fontawesome.com/2ccbace95d.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<!--pour la barre aprés connexion-->
+	<div class="mode-edition">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
+	<!--fin-->
+
+	<div id="myModal" class="modal">
+		<!--code pour la modale1------------------------------->	
+			<!--pour la gallery et la suppression des image--->
+		<div class="modal-content">
+			<span class="close"><i class="fa-solid fa-xmark"></i></span>
+			<h2 class="titre-h2">Galerie photo</h2>
+		
+		
+			<div class="work-container" id="modalGallery">
+	
+			</div>
+		
+			<div class="ligne"></div>
+			<button id="ajouter-photo">Ajouter une photo</button>
+		</div>
+			<!--fin pour la gallery et la suppression des image--->
+
+	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -36,7 +64,7 @@
 		</article>
 	</section>
 	 <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2>Mes Projets <span id="button-modifer" ><span><i class="fa-regular fa-pen-to-square"></i></span><span class="text-button-modifer">modifier</span></span></span></h2>
 		    <div class="filters"></div> <!-- Conteneur pour les éléments <figure> -->
 			<div id="buttons"></div><!-- Conteneur pour les boutons -->
     </section>
