@@ -470,7 +470,7 @@ figcaption{
     top: 50%; /* Place la modale au centre verticalement */
     left: 50%; /* Place la modale au centre horizontalement */
     transform: translate(-50%, -50%); /* Centre la modale* */
-    padding: 20px;
+	overflow-y: auto; /* Activation du défilement vertical si le contenu dépasse */
 }
 
 .fa-arrow-left-long {
@@ -614,5 +614,9 @@ figcaption{
 	margin-bottom: 12px;
 	background-color: white;
 }
+
+#photo-file {
+	 display: none;
+} 
 
 /*---------------fin code modale----------------*/

@@ -202,5 +202,29 @@ document.addEventListener("click", function(event) {
 });
 
 
+// ********** code pour afficher la photo **********************//
 
-
+const file = document.getElementById("file");
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const img = document.getElementById("photo-file");
+  if (!file) {
+    alert("Veuillez sélectionner un fichier");
+    return;
+  }
+  if (file.files[0].size >= 10000000) {
+    alert("Fichier trop lourd");
+    return;
+  }
+  if (
+    file.files[0].type !== "image/jpeg" &&
+    file.files[0].type !== "image/jpg" &&
+    file.files[0].type !== "image/png" &&
+    file.files[0].type !== "image/webp"
+  ) {
+    alert("Format de fichier invalide");
+    return;
+  }
+  img.src = URL.createObjectURL(file.files[0]);
+});
