@@ -10,7 +10,7 @@ const closeBtn = document.getElementsByClassName("close")[0];
 
 // bouton "Modifier"
 modifierBtn.addEventListener("click", function() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
   generateModalGallery()
 });
 
@@ -197,7 +197,7 @@ document.addEventListener("click", function(event) {
   if (event.target !== modalAjout && !modalAjout.contains(event.target)) {
     
     modalAjout.style.display = "none";
-    document.querySelector(".modal-content").style.display = "block";
+    document.querySelector(".modal-content").style.display = "flex";
   }
 });
 
