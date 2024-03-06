@@ -118,7 +118,7 @@ generateModalGallery();
 
 
 
-
+//----------------- Code pour la deuxième modal ----------------------------------
 
 
 // Sélectionne le bouton "Ajouter une photo" dans le document
@@ -150,3 +150,57 @@ ajoutPhotoBtn.addEventListener("click", function(event) {
     document.querySelector(".modal-content").style.display = "flex";
   });
 });
+
+
+//----------------- Code pour la fonction de suppression -------------------------
+// Fonction pour supprimer un work avec l'ID 
+function deleteWork(workId, updateGallery) {
+  // Récupère le jeton 
+  const token = localStorage.getItem('token');
+  fetch(`http://localhost:5678/api/works/${workId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text(); 
+  })
+  .then(() => {
+    const modalWorkFigure = modal.querySelector(`figure[data-work-id="${workId}"]`);
+    const modalDeleteIcons = modal.querySelectorAll('.delete-icon-modal1');
+    
+    if (modalWorkFigure) {
+      modalWorkFigure.remove();
+    } else {
+      console.log('Aucune figure trouvée dans la modal1 pour le work ID:', workId);
+    }
+    if (updateGallery) {
+      generateModalGallery();
+    }
+  })
+  
+  .catch(error => console.error('Erreur lors de la suppression du work :', error));
+}
+
+
+//---------------------------pour fermer la 2 modal--------------------------------
+
+// Récupérer la deuxième modal
+const modalAjout = document.querySelector(".modalAjout");
+document.addEventListener("click", function(event) {
+  if (event.target !== modalAjout && !modalAjout.contains(event.target)) {
+    
+    modalAjout.style.display = "none";
+    document.querySelector(".modal-content").style.display = "block";
+  }
+});
+
+
+
+
