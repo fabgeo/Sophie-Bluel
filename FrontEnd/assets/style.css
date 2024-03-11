@@ -481,14 +481,15 @@ figcaption{
 	left: 40px;
 }
 
-.close-Ajout {
-	color: #aaa;
+.close2 {
+	color: black;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
 	position: absolute;
   	right: 40px;
 	top: 25px;
+	cursor: pointer;
   }
 
 .modalAjout h3{
@@ -620,3 +621,13 @@ figcaption{
 } 
 
 /*---------------fin code modale----------------*/
+
+
+.hidden {
+	display: none;
+  }
+
+      /* Style pour masquer les icônes de Font Awesome */
+	  .fa-hidden {
+		visibility: hidden;
+	  }

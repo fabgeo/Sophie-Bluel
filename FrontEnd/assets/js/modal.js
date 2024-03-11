@@ -8,6 +8,9 @@ const modal = document.getElementById("myModal");
 //  bouton de fermeture
 const closeBtn = document.getElementsByClassName("close")[0];
 
+//  bouton de fermeture
+const closeBtn2 = document.getElementsByClassName("close2")[0];
+
 // bouton "Modifier"
 modifierBtn.addEventListener("click", function() {
   modal.style.display = "flex";
@@ -16,6 +19,11 @@ modifierBtn.addEventListener("click", function() {
 
 //  bouton de fermeture
 closeBtn.addEventListener("click", function() {
+  modal.style.display = "none";
+});
+
+//  bouton de fermeture
+closeBtn2.addEventListener("click", function() {
   modal.style.display = "none";
 });
 
@@ -102,7 +110,7 @@ async function generateModalGallery() {
     });
 
     // Met à jour la page d'accueil après la génération de la galerie
-    // updateHomePage();
+    updateHomePage();
   
   } catch (error) {
     // Gère les erreurs survenues lors de la génération de la galerie
@@ -204,11 +212,10 @@ document.addEventListener("click", function(event) {
 
 // ********** code pour afficher la photo **********************//
 
-const file = document.getElementById("file");
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const img = document.getElementById("photo-file");
+const file = document.getElementById("photo-file");
+file.addEventListener("change", () => {
+  const imgContent = document.querySelector(".image-content");
+  const img = document.createElement("img");
   if (!file) {
     alert("Veuillez sélectionner un fichier");
     return;
@@ -227,4 +234,125 @@ form.addEventListener("submit", (e) => {
     return;
   }
   img.src = URL.createObjectURL(file.files[0]);
+  imgContent.appendChild(img);
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("form-ajout");
+  const validerButton = document.getElementById("valider");
+
+  // Fonction pour vérifier si tous les champs sont remplis
+  function verifierChamps() {
+    const champsRemplis = document.querySelectorAll('#photo-file:valid, #photo-title:valid, #photo-category:valid');
+    if (champsRemplis.length === 3) {
+      validerButton.style.backgroundColor = '#1D6154'; // Mettre le bouton en vert
+    } else {
+      validerButton.style.backgroundColor = ''; // Remettre la couleur par défaut
+    } 
+  }
+
+  // Ajouter un écouteur d'événements sur le formulaire pour vérifier les champs à chaque changement
+  form.addEventListener("change", verifierChamps);
+  
+  // Au chargement initial de la page
+  verifierChamps();
+});
+
+//------code formulaire(ajout photo)-------------------------------------------
+//Aperçu photo avant upload
+const image = document.getElementById('photo-file');
+const title = document.getElementById('photo-title');
+const category = document.getElementById('photo-category');
+const submit = document.getElementById('valider');
+
+// Événement lorsque l'utilisateur sélectionne une image
+image.addEventListener('change', function(event) {
+  // const file = image.files[0];
+  // const container = document.querySelector('.image-content');
+  // container.style.background = 'center / contain no-repeat url(' + URL.createObjectURL(file) + ')';
+  
+  const faImage = document.querySelector('.fa-image');
+  const photoLabel = document.querySelector('.photo');
+  const descr = document.querySelector('.discr');
+  
+  image.style.display="none";
+  faImage.style.display = 'none';
+  photoLabel.style.display = 'none';
+  descr.style.display = 'none';
+});
+
+
+
+
+  //--------------------------envoie du formulaire-----------------------------------------
+ 
+  submit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Formulaire soumis avec succès');
+  
+    // Validation des champs
+    if (!image.files[0]) {
+      alert('Veuillez sélectionner une image.');
+      return;
+    }
+    if (!title.value) { 
+      alert('Veuillez entrer un titre.');
+      return;
+    }
+    if (!category.value) { 
+      alert('Veuillez sélectionner une catégorie.');
+      return;
+    }
+  // Construction du formulaire FormData
+    const formData = new FormData();
+    formData.append('image', image.files[0]);
+    formData.append('title', title.value);
+    formData.append('category', category.value);
+  
+    try {
+      const categoryID = await getIdCategory(category.value);
+      formData.append('category', categoryID);
+  
+      // Envoi du formulaire 
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      
+  
+      if (response.status === 201) {
+        const workContainer = document.querySelector('.work-container');
+        workContainer.innerHTML = '';
+        title.value = '';
+        category.value = '';
+  
+        // Restaurer la classe .image-content
+        const container = document.querySelector('.image-content');
+        container.style.background = '';
+        const faImage = document.querySelector('.fa-image');
+        const photoLabel = document.querySelector('.photo');
+        const descr = document.querySelector('.discr');
+        const photofile = document.getElementById('photo-file');
+        
+        photofile.style.display = "block";
+        faImage.style.display = 'block';
+        photoLabel.style.display = 'block';
+        descr.style.display = 'block';
+        
+      
+        generateModalGallery();
+  
+        document.querySelector(".modalAjout").style.display = 'none';
+        document.querySelector('.modal-content').style.display = 'flex';
+      } else {
+        alert('Erreur ajout du projet');
+      }
+    } catch (error) {
+      console.error('Erreur envoi du formulaire :', error);
+    }
+  });
