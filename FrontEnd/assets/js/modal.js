@@ -282,7 +282,28 @@ image.addEventListener('change', function(event) {
 });
 
 
+//-----------------------------------------------------------------------
 
+// Fonction de recherche de l'id de la catégorie
+async function getIdCategory(category) {
+  try {
+    const response = await fetch('http://localhost:5678/api/categories');
+
+    const data = await response.json();
+    const foundCategory = data.find(cat => cat.name.toLowerCase() === category.toLowerCase());
+
+    if (foundCategory) {
+      console.log('Catégorie trouvée. ID:', foundCategory.id);
+
+      return foundCategory.id;
+    } else {
+      throw new Error('Catégorie non trouvée');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des catégories :', error);
+    throw error;
+  }
+}
 
   //--------------------------envoie du formulaire-----------------------------------------
  
