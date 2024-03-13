@@ -627,7 +627,11 @@ figcaption{
 	display: none;
   }
 
-      /* Style pour masquer les icônes de Font Awesome */
-	  .fa-hidden {
-		visibility: hidden;
-	  }
+/* Style pour masquer les icônes de Font Awesome */
+.fa-hidden {
+	visibility: hidden;
+}
+
+#form-ajout > div.image-content > img {
+	width: 150px;
+}
