@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   errorContainer.textContent = "L'e-mail saisi est invalide.";
               } else {
                   // Si le statut de la réponse n'est ni 200 ni 401 ni 404, une erreur générale s'est produite
-                  errorContainer.textContent = "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
+                  errorContainer.textContent = "Une erreur lors de la connexion. Veuillez réessayer.";
                   console.error('Erreur lors de la connexion:', response.statusText);
               }
           } catch (error) {
               // Gestion des erreurs inattendues survenues lors de la connexion
-              errorContainer.textContent = "Une erreur inattendue s'est produite lors de la connexion. Veuillez réessayer.";
+              errorContainer.textContent = "Une erreur lors de la connexion. Veuillez réessayer.";
               console.error('Erreur inattendue lors de la connexion:', error.message);
           }
       });

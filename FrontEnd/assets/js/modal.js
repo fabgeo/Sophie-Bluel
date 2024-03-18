@@ -5,10 +5,10 @@ const modifierBtn = document.getElementById("button-modifer");
 //  fenêtre modale
 const modal = document.getElementById("myModal");
 
-//  bouton de fermeture
+//  bouton de fermeture modale 1
 const closeBtn = document.getElementsByClassName("close")[0];
 
-//  bouton de fermeture
+//  bouton de fermeture modale 2
 const closeBtn2 = document.getElementsByClassName("close2")[0];
 
 // bouton "Modifier"
@@ -17,12 +17,12 @@ modifierBtn.addEventListener("click", function() {
   generateModalGallery()
 });
 
-//  bouton de fermeture
+//  bouton de fermeture modale 1
 closeBtn.addEventListener("click", function() {
   modal.style.display = "none";
 });
 
-//  bouton de fermeture
+//  bouton de fermeture modale 2
 closeBtn2.addEventListener("click", function() {
   modal.style.display = "none";
 });
@@ -31,7 +31,7 @@ closeBtn2.addEventListener("click", function() {
 // Fonction asynchrone pour générer la galerie modale
 async function generateModalGallery() {
   try {
-    console.log('Début de la génération de la galerie');
+    console.log('Début de la galerie');
 
     // Effectue une requête pour récupérer les données des œuvres depuis l'API
     const response = await fetch('http://localhost:5678/api/works/');
@@ -44,11 +44,6 @@ async function generateModalGallery() {
     
     // Vide le conteneur avant de générer les nouvelles figures
     workContainer.innerHTML = '';
-    
-    // Vérifie s'il y a des œuvres à afficher
-    if (works.length === 0) {
-      console.log('Aucune œuvre trouvée.');
-    }
 
     // Parcourt chaque œuvre pour créer une figure correspondante dans la galerie
     works.forEach(work => {
@@ -88,10 +83,8 @@ async function generateModalGallery() {
       // Ajoute un événement de clic pour supprimer l'œuvre lorsque l'icône est cliquée
       deleteIcon.addEventListener('click', function() {
         let workId = work.id;
-        console.log('Avant deleteWork');
         // Mettez à jour la galerie après suppression
         deleteWork(workId, true);
-        console.log('Après deleteWork');
       });
       
       // Ajoute l'icône de suppression dans son conteneur
@@ -110,6 +103,7 @@ async function generateModalGallery() {
     });
 
     // Met à jour la page d'accueil après la génération de la galerie
+    console.log('galerie générée')
     updateHomePage();
   
   } catch (error) {
@@ -121,7 +115,38 @@ async function generateModalGallery() {
 // Appelle la fonction pour générer la galerie modale
 generateModalGallery();
 
+// -----------------Fonction pour mettre à jour la page d'accueil--------------------------------------
+async function updateHomePage() {
+  
+  try {
+    const response = await fetch('http://localhost:5678/api/works/');
+    const works = await response.json();
 
+const homeGallery = document.querySelector('.gallery');
+homeGallery.innerHTML = '';
+
+works.forEach(work => {
+  
+  const figure = document.createElement('figure');
+  figure.setAttribute('data-category', work.category.name.toLowerCase());
+
+  const img = document.createElement('img');
+  img.src = work.imageUrl;
+  img.alt = work.title;
+
+  const figcaption = document.createElement('figcaption');
+  figcaption.textContent = work.title;
+
+  figure.appendChild(img);
+  figure.appendChild(figcaption);
+  homeGallery.appendChild(figure);
+});
+console.log('Page daccueil mise à jour');
+
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la page daccueil :', error);
+  }
+}
 
 
 
@@ -192,7 +217,7 @@ function deleteWork(workId, updateGallery) {
     if (modalWorkFigure) {
       modalWorkFigure.remove();
     } else {
-      console.log('Aucune figure trouvée dans la modal1 pour le work ID:', workId);
+      console.log('Aucune figure trouvée', workId);
     }
     
     // Met à jour la galerie modale si nécessaire
@@ -202,7 +227,7 @@ function deleteWork(workId, updateGallery) {
   })
   .catch(error => {
     // Gère les erreurs lors de la suppression du travail
-    console.error('Erreur lors de la suppression du work :', error);
+    console.error('Erreur lors de la suppression', error);
   });
 }
 
@@ -263,43 +288,6 @@ file.addEventListener("change", () => {
   imgContent.appendChild(img);
 });
 
-// remplissage Formulaire
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   const form = document.getElementById("form-ajout");
-//   const validerButton = document.getElementById("valider");
-
-//   // Fonction pour vérifier si tous les champs sont remplis
-//   function verifierChamps() {
-//     const formData = new FormData(form);
-
-//     const errorContainer = document.getElementById("error-container");
-
-//     function verifierChamps() {
-//       const champsRemplis = document.querySelectorAll('#photo-file:valid, #photo-title:valid, #photo-category:valid');
-//       if (champsRemplis.length === 3) {
-//         validerButton.style.backgroundColor = '#1D6154'; // Mettre le bouton en vert
-//       } else {
-//         validerButton.style.backgroundColor = ''; // Remettre la couleur par défaut
-//       } 
-//     }
-
-//     if (!formData.get("title") || !formData.get("image") || !formData.get("image").name) {
-//       errorContainer.innerHTML = "Veuillez remplir tous les champs !!!";
-//       validerButton.disabled = true; // Désactiver le bouton de validation
-//     } else {
-//       errorContainer.innerHTML = ""; // Effacer le message d'erreur
-//       validerButton.disabled = false; // Activer le bouton de validation
-//       validerButton.style.backgroundColor = '#1D6154'; // Mettre le bouton en vert
-//     }
-//   }
-
-//   // Ajouter un écouteur d'événements sur le formulaire pour vérifier les champs à chaque changement
-//   form.addEventListener("change", verifierChamps);
-  
-//   // Au chargement initial de la page
-//   verifierChamps();
-// });
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -432,21 +420,25 @@ async function getIdCategory(category) {
         const faImage = document.querySelector('.fa-image');
         const photoLabel = document.querySelector('.photo');
         const descr = document.querySelector('.discr');
-        const photofile = document.getElementById('photo-file');
-        photofile.style.display = 'block';
-        faImage.style.display = 'block';
-        photoLabel.style.display = 'block';
-        descr.style.display = 'block';
+        // const photofile = document.getElementById('photo-file');
+        // photofile.style.display = 'none';
+        faImage.style.display = 'flex';
+        photoLabel.style.display = 'flex';
+        descr.style.display = 'flex';
   
         generateModalGallery(); // Génère à nouveau la galerie modale avec les données mises à jour
   
         // Cache la modal d'ajout et affiche le contenu principal
         document.querySelector(".modalAjout").style.display = 'none';
         document.querySelector('.modal-content').style.display = 'flex';
+
+        // const img = document.querySelector(".image-content > img");
+        // img.src = "";
+        
       } else {
         alert('Erreur ajout du projet'); // Affiche une alerte en cas d'erreur lors de l'ajout du projet
       }
     } catch (error) { // Gère les erreurs potentielles lors de l'envoi du formulaire
-      console.error('Erreur envoi du formulaire :', error); // Affiche l'erreur dans la console
+      console.error('Erreur envoi formulaire :', error); // Affiche l'erreur dans la console
     }
   });
