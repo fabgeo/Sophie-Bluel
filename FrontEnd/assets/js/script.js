@@ -30,33 +30,15 @@ fetch('http://localhost:5678/api/works/')
       figure.appendChild(figcaption);
 
       // Ajoute la <figure> à la galerie
-      gallery.appendChild(figure);
+      // gallery.appendChild(figure);
     });
   })
   // Gère les erreurs qui pourraient survenir lors de la récupération des données
   .catch(error => console.error('Erreur lors de la récupération des works :', error));
 
 
-// Récupère l'élément HTML avec l'ID 'portfolio' où les boutons seront ajoutés
-const portfolioSection = document.getElementById('portfolio');
 
-// Crée les boutons de filtrage pour les catégories spécifiées
-const categories = ['tous', 'objets', 'appartements', 'hotels & restaurants'];
-const buttonsContainer = document.createElement('div'); // Crée un conteneur pour les boutons
-buttonsContainer.id = 'buttons'; // Définit l'ID du conteneur
-buttonsContainer.classList.add('button-container'); // Ajoute une classe pour personnaliser les styles CSS
-
-// Parcourt chaque catégorie et crée un bouton pour chaque catégorie
-categories.forEach(category => {
-    const button = document.createElement('button'); // Crée un bouton
-    button.textContent = category; // Définit le texte du bouton
-    button.classList.add('filter-button'); // Ajoute une classe pour personnaliser les styles CSS
-    button.addEventListener('click', (e) => filtrerElements(category, e));// Ajoute un écouteur d'événements pour filtrer les éléments lors du clic sur le bouton
-    buttonsContainer.appendChild(button); // Ajoute le bouton au conteneur
-});
-
-// Ajoute le conteneur de boutons à la section du portfolio dans le HTML
-portfolioSection.appendChild(buttonsContainer);
+    
 
 // Récupère l'élément HTML avec la classe 'gallery' où les éléments seront filtrés
 const gallery = document.querySelector('.gallery');
@@ -101,11 +83,28 @@ boutonsFiltre.forEach(function(bouton) {
   });
 });
 
-const tous = document.querySelector('.filter-button'); 
-tous.style.color = "white";
-tous.style.backgroundColor = "#1D6154";
-console.log(tous)
 
+document.addEventListener('DOMContentLoaded', function() {
+  const portfolioSection = document.getElementById('portfolio');
+
+// Crée les boutons de filtrage pour les catégories spécifiées
+const categories = ['tous', 'objets', 'appartements', 'hotels & restaurants'];
+const buttonsContainer = document.createElement('div'); // Crée un conteneur pour les boutons
+buttonsContainer.id = 'buttons'; // Définit l'ID du conteneur
+buttonsContainer.classList.add('button-container'); // Ajoute une classe pour personnaliser les styles CSS
+
+// Parcourt chaque catégorie et crée un bouton pour chaque catégorie
+categories.forEach(category => {
+  const button = document.createElement('button'); // Crée un bouton
+  button.textContent = category; // Définit le texte du bouton
+  button.classList.add('filter-button'); // Ajoute une classe pour personnaliser les styles CSS
+  button.addEventListener('click', (e) => filtrerElements(category, e));// Ajoute un écouteur d'événements pour filtrer les éléments lors du clic sur le bouton
+  buttonsContainer.appendChild(button); // Ajoute le bouton au conteneur
+});
+console.log("portfolioSection:", portfolioSection);
+// Ajoute le conteneur de boutons à la section du portfolio dans le HTML
+portfolioSection.appendChild(buttonsContainer);
+});
 
 
 

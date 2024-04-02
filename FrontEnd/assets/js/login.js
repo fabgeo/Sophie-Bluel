@@ -91,19 +91,27 @@ document.addEventListener("DOMContentLoaded", function () {
       const isLoggedIn = token !== null;
 
       // Change le texte du bouton de connexion/déconnexion en fonction de l'état de connexion
-      baliseLogin.innerHTML = isLoggedIn ? 'logout' : 'login';
+      if (baliseLogin) {
+        baliseLogin.innerHTML = isLoggedIn ? 'logout' : 'login';
+    }
      
       // Affiche ou masque le bouton de modification en fonction de l'état de connexion
-      buttonModifer.style.display = isLoggedIn ? 'inline-flex' : 'none';
+      if (buttonModifer) {
+        buttonModifer.style.display = isLoggedIn ? 'inline-flex' : 'none';
+    }
 
       // Affiche ou masque le bouton de filtrage en fonction de l'état de connexion
-      buttonFilters.style.display = isLoggedIn ? 'none' : 'flex';
+      if (buttonFilters) {
+        buttonFilters.style.display = isLoggedIn ? 'none' : 'flex';
+    }
       
       // Modifie la marge de l'en-tête en fonction de l'état de connexion
       header.style.margin = isLoggedIn ? '110px 0px 50px 0px' : '50px 0px 50px 0px';
      
       // Affiche ou masque l'élément de mode d'édition en fonction de l'état de connexion
-      modeEdition.style.display = isLoggedIn ? 'flex' : 'none';
+      if (modeEdition) {
+        modeEdition.style.display = isLoggedIn ? 'flex' : 'none';
+    }
       console.log(buttonFilters)
   }
 
