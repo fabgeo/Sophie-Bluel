@@ -107,6 +107,20 @@ portfolioSection.appendChild(buttonsContainer);
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Récupère le jeton d'authentification depuis le stockage local
+  const token = localStorage.getItem('token');
+  // Vérifie si l'utilisateur est connecté en vérifiant si le jeton est présent
+  const isLoggedIn = token !== null;
+
+  // Si l'utilisateur est connecté, supprime les éléments avec la classe .button-container
+  if (isLoggedIn) {
+      const buttonContainers = document.querySelectorAll('.button-container');
+      buttonContainers.forEach(container => {
+          container.remove();
+      });
+  }
+});
 
 
 

@@ -98,11 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (buttonModifer) {
         buttonModifer.style.display = isLoggedIn ? 'inline-flex' : 'none';
     }
-
-    //   // Affiche ou masque le bouton de filtrage en fonction de l'état de connexion
-    //   if (buttonFilters) {
-    //     buttonFilters.style.display = isLoggedIn ? 'none' : 'flex';
-    // }
       
       // Modifie la marge de l'en-tête en fonction de l'état de connexion
       header.style.margin = isLoggedIn ? '110px 0px 50px 0px' : '50px 0px 50px 0px';
@@ -132,20 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Récupère le jeton d'authentification depuis le stockage local
-    const token = localStorage.getItem('token');
-    // Vérifie si l'utilisateur est connecté en vérifiant si le jeton est présent
-    const isLoggedIn = token !== null;
-
-    // Si l'utilisateur est connecté, supprime les éléments avec la classe .button-container
-    if (isLoggedIn) {
-        const buttonContainers = document.querySelectorAll('.button-container');
-        buttonContainers.forEach(container => {
-            container.remove();
-        });
-    }
-});
 
 
 

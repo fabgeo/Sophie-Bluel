@@ -407,6 +407,8 @@ async function getIdCategory(category) {
     const formData = new FormData(); // Crée un nouvel objet FormData pour stocker les données du formulaire
     formData.append('image', image.files[0]); // Ajoute le fichier image sélectionné au FormData
     formData.append('title', title.value); // Ajoute la valeur du champ titre au FormData
+    
+
   
     try {
       const categoryID = await getIdCategory(category.value); // Récupère l'ID de la catégorie sélectionnée
@@ -435,7 +437,7 @@ async function getIdCategory(category) {
         const photoLabel = document.querySelector('.photo');
         const descr = document.querySelector('.discr');
 
-        
+
         
         faImage.style.display = 'flex';
         photoLabel.style.display = 'flex';
@@ -447,8 +449,8 @@ async function getIdCategory(category) {
         document.querySelector(".modalAjout").style.display = 'none';
         document.querySelector('.modal-content').style.display = 'flex';
 
-        // const img = document.querySelector(".image-content > img");
-        // img.src = "";
+        const img = document.querySelectorAll("#form-ajout > div.image-content > img");
+        img.forEach(img => img.remove());
         
       } else {
         alert('Erreur ajout du projet'); // Affiche une alerte en cas d'erreur lors de l'ajout du projet
