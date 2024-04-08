@@ -117,34 +117,48 @@ generateModalGallery();
 
 // -----------------Fonction pour mettre à jour la page d'accueil--------------------------------------
 async function updateHomePage() {
-  
   try {
-    const response = await fetch('http://localhost:5678/api/works/');
-    const works = await response.json();
+      // Envoi d'une requête GET à l'API pour récupérer les données sur les travaux
+      const response = await fetch('http://localhost:5678/api/works/');
+      
+      // Conversion de la réponse en format JSON
+      const works = await response.json();
 
-const homeGallery = document.querySelector('.gallery');
-homeGallery.innerHTML = '';
+      // Sélection de la galerie sur la page d'accueil et effacement de son contenu précédent
+      const homeGallery = document.querySelector('.gallery');
+      homeGallery.innerHTML = '';
 
-works.forEach(work => {
-  
-  const figure = document.createElement('figure');
-  figure.setAttribute('data-category', work.category.name.toLowerCase());
+      // Parcours de chaque travail récupéré
+      works.forEach(work => {
+          // Création d'un nouvel élément <figure>
+          const figure = document.createElement('figure');
+          
+          // Attribution de l'attribut 'data-category' avec la catégorie du travail en minuscules
+          figure.setAttribute('data-category', work.category.name.toLowerCase());
 
-  const img = document.createElement('img');
-  img.src = work.imageUrl;
-  img.alt = work.title;
+          // Création d'un élément <img> pour afficher l'image du travail
+          const img = document.createElement('img');
+          img.src = work.imageUrl;
+          img.alt = work.title;
 
-  const figcaption = document.createElement('figcaption');
-  figcaption.textContent = work.title;
+          // Création d'un élément <figcaption> pour afficher le titre du travail
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent = work.title;
 
-  figure.appendChild(img);
-  figure.appendChild(figcaption);
-  homeGallery.appendChild(figure);
-});
-console.log('Page daccueil mise à jour');
+          // Ajout de l'image et du titre à la figure
+          figure.appendChild(img);
+          figure.appendChild(figcaption);
+
+          // Ajout de la figure à la galerie sur la page d'accueil
+          homeGallery.appendChild(figure);
+      });
+
+      // Affichage d'un message de succès dans la console
+      console.log('Page d\'accueil mise à jour');
 
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de la page daccueil :', error);
+      // Gestion des erreurs : Affichage d'un message d'erreur dans la console
+      console.error('Erreur lors de la mise à jour de la page d\'accueil :', error);
   }
 }
 
@@ -420,8 +434,9 @@ async function getIdCategory(category) {
         const faImage = document.querySelector('.fa-image');
         const photoLabel = document.querySelector('.photo');
         const descr = document.querySelector('.discr');
-        // const photofile = document.getElementById('photo-file');
-        // photofile.style.display = 'none';
+
+        
+        
         faImage.style.display = 'flex';
         photoLabel.style.display = 'flex';
         descr.style.display = 'flex';
